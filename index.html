@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Compiled and minified JavaScript -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
+      defer
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Leaflet -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+      defer
+    ></script>
+    <!--Author sheets-->
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/controller.js" defer></script>
+
+    <title>FoodMap | Worlds Favorite Recipes</title>
+  </head>
+
+  <body>
+    <!-- MAIN NAV -->
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper white">
+          <a href="#!" class="brand-logo black-text">FoodMap</a>
+
+          <a href="#" data-target="mobile-nav" class="sidenav-trigger"
+            ><i class="material-icons black-text">menu</i></a
+          >
+          <ul class="right hide-on-med-and-down">
+            <li>
+              <a href="#" class="black-text btn--show-modal-recipe"
+                ><i class="large material-icons left blue-text darken-4"
+                  >create</i
+                >Create Recipe</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="black-text dropdown-trigger main-dropdown"
+                data-target="favorites"
+                ><i class="material-icons left red-text darken-4">loyalty</i
+                >Favorites
+                <i class="material-icons right grey-text">arrow_drop_down</i></a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="btn-large green lighten-1 btn--show-modal-shopping"
+                ><i class="large material-icons left">shopping_basket</i
+                >Shopping List</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <!-- DROPDOWN OPTIONS -->
+    <ul id="favorites" class="dropdown-content">
+      <li class="divider"></li>
+      <li>
+        <a href="#!" class="black-text left-align"
+          >Clear Favorites <i class="material-icons right">local_dining</i></a
+        >
+      </li>
+    </ul>
+    <!-- SIDE/MOBILE NAV -->
+
+    <ul class="sidenav sidenav-close" id="mobile-nav">
+      <li>
+        <div class="background valign-wrapper">
+          <h2 class="center-align white-text">FM</h2>
+        </div>
+      </li>
+      <li>
+        <a href="#" class="black-text create-sideNav"
+          ><i class="material-icons left blue-text darken-4">create</i>Create
+          Recipe</a
+        >
+      </li>
+      <li>
+        <a href="#" class="black-text side-dropdown"
+          ><i class="material-icons left red-text darken-4">loyalty</i
+          >Favorites</a
+        >
+      </li>
+      <!-- <li>
+        <a
+          ><i class="material-icons left red-text darken-4">loyalty</i>Favorites
+          <i class="material-icons right grey-text">arrow_drop_down</i></a
+        >
+      </li> -->
+      <li>
+        <div class="divider"></div>
+      </li>
+      <li>
+        <a href="#" class="black-text shopping-sideNav"
+          ><i class="material-icons left green-text lighten-1"
+            >shopping_basket</i
+          >Shopping List</a
+        >
+      </li>
+    </ul>
+
+    <!-- MAIN SECTION -->
+
+    <div class="row">
+      <div class="col s12 m4 left">
+        <div class="input-field col s12 search">
+          <i class="material-icons prefix">textsms</i>
+          <input type="text" id="autocomplete-input" class="autocomplete" />
+          <label for="autocomplete-input">Search Recipes</label>
+        </div>
+        <div class="list">
+          <ul class="collection recipe-collection">
+            <!-- <li class="collection-item avatar">
+              <img src="images/yuna.jpg" alt="" class="circle">
+              <span class="title">Title</span> <br>
+            <a href="#5ed6604591c37cdc054bcc13">recipe 1</a>
+            <a href="#5ed6604591c37cdc054bc886">recipe 2</a>
+              <p>
+                First Line <br />
+                Second Line
+              </p>
+              <a href="#!" class="secondary-content"
+                ><i
+                  class="material-icons tooltipped"
+                  data-position="bottom"
+                  data-tooltip="Add Me To Favorites"
+                  >favorite</i
+                ></a
+              >
+            </li>
+            <li class="collection-item avatar">
+              <i class="material-icons circle">folder</i>
+              <span class="title">Title</span>
+              <p>
+                First Line <br />
+                Second Line
+              </p>
+              <a href="#!" class="secondary-content"
+                ><i
+                  class="material-icons tooltipped"
+                  data-position="bottom"
+                  data-tooltip="Add Me To Favorites"
+                  >favorite</i
+                ></a
+              >
+            </li>
+            <li class="collection-item avatar">
+              <i class="material-icons circle green">insert_chart</i>
+              <span class="title">Title</span>
+              <p>
+                First Line <br />
+                Second Line
+              </p>
+              <a href="#!" class="secondary-content"
+                ><i
+                  class="material-icons tooltipped"
+                  data-position="bottom"
+                  data-tooltip="Add Me To Favorites"
+                  >favorite</i
+                ></a
+              >
+            </li>
+            <li class="collection-item avatar">
+              <i class="material-icons circle red">play_arrow</i>
+              <span class="title">Title</span>
+              <p>
+                First Line <br />
+                Second Line
+              </p>
+              <a href="#!" class="secondary-content"
+                ><i
+                  class="material-icons tooltipped"
+                  data-position="bottom"
+                  data-tooltip="Add Me To Favorites"
+                  >favorite</i
+                ></a
+              >
+            </li> -->
+          </ul>
+          <ul class="pagination center">
+            <!-- <li class="waves-effect"><a href="#!" class="teal white-text">Prev<i class="material-icons left">chevron_left</i></a></li>
+            <li class="waves-effect"><a href="#!" class="teal white-text">Next<i class="material-icons right">chevron_right</i></a></li> -->
+          </ul>
+        </div>
+      </div>
+      <!-- </div> -->
+
+      <!-- RECIPE SECTION -->
+      <div class="col s12 m8 right recipe">
+        <div class="card recipe-container">
+          <div class="card-image">
+            <!-- <img
+                src="https://images.unsplash.com/photo-1481798699994-481e7c0a8282?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjF8fGNoZWZ8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60" alt="Stock background Image"
+                />
+                <span class="card-title"><h2>Search to find your next loved meal</h2></span> -->
+          </div>
+
+          <!-- <div class="card-image">
+            <img
+              src="https://images.unsplash.com/photo-1601662528567-526cd06f6582?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fHdoaXRlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+            />
+            <span class="card-title">Card Title</span>
+            <a
+              class="btn-floating btn-large halfway-fab waves-effect waves-light red"
+              ><i
+                class="material-icons tooltipped"
+                data-position="bottom"
+                data-tooltip="Add Me To Favorites"
+                >loyalty</i
+              ></a
+            >
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <p>
+                <span class="recipe-prep"></span
+                ><i class="material-icons left">access_time</i> prep time
+              </p>
+              <p>
+                <span class="recipe-cook"></span
+                ><i class="material-icons left">access_time</i> cooking time
+              </p>
+              <p>
+                <span class="recipe-servings"></span>
+                <i class="material-icons left">group</i> Servings
+                <i class="material-icons right btn--servings">add_circle_outline</i>
+                <i class="material-icons right btn--servings">remove_circle_outline</i>
+              </p>
+            </div>
+            <div class="card-ingredients">
+              <h4 class="center">INGREDIENTS</h4>
+
+              <ul class="recipe__ingredient-list">
+                <li class="recipe__ingredient">
+                  <p>
+                    <span class="recipe-quantity">quantity</span>
+                    <span class="recipe-unit">unit</span>
+                    <span class="recipe-item">item</span>
+                  </p>
+                </li>
+
+                <li class="recipe__ingredient">
+                  <p>
+                    <span class="recipe-quantity">quantity</span>
+                    <span class="recipe-unit">unit</span>
+                    <span class="recipe-item">item</span>
+                  </p>
+                </li>
+
+                <li class="recipe__ingredient">
+                  <p>
+                    <span class="recipe-quantity">quantity</span>
+                    <span class="recipe-unit">unit</span>
+                    <span class="recipe-item">item</span>
+                  </p>
+                </li>
+
+                <li class="recipe__ingredient">
+                  <p>
+                    <span class="recipe-quantity">quantity</span>
+                    <span class="recipe-unit">unit</span>
+                    <span class="recipe-item">item</span>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>-->
+        </div>
+      </div>
+    </div>
+
+    <div class="recipeModal myModal hidden">
+      <button class="btn--close-modal-recipe">&times;</button>
+      <h4 class="center">Create your Recipe!</h4>
+      <form class="recipeForm col s12">
+        <div class="container">
+          <div class="row center-align">
+            <div class="input-field col s3">
+              <label>Title</label>
+              <input required name="title" type="text" />
+            </div>
+            <div class="input-field col s3">
+              <label>URL</label>
+              <input required name="sourceUrl" type="text" />
+            </div>
+            <div class="input-field col s3">
+              <label>Image URL</label>
+              <input required name="image" type="text" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s3">
+              <label>Publisher</label>
+              <input required name="publisher" type="text" />
+            </div>
+            <div class="input-field col s3">
+              <label>Prep time</label>
+              <input required name="cookingTime" type="number" />
+            </div>
+            <div class="input-field col s3">
+              <label>Servings</label>
+              <input required name="servings" type="number" />
+            </div>
+          </div>
+        </div>
+
+        <h4 class="center">Ingredients</h4>
+        <div class="container container-ingredients">
+          <div class="row">
+            <div class="input-field col s3">
+              <label>Ingredient 1</label>
+              <input
+                value="0.5,kg,Rice"
+                type="text"
+                required
+                name="ingredient-1"
+                placeholder="Format: 'Quantity,Unit,Description'"
+              />
+            </div>
+            <div class="input-field col s3">
+              <label>Ingredient 2</label>
+              <input
+                value=",,salt"
+                type="text"
+                name="ingredient-2"
+                placeholder="Format: 'Quantity,Unit,Description'"
+              />
+            </div>
+            <div class="input-field col s3">
+              <label>Ingredient 3</label>
+              <input
+                type="text"
+                name="ingredient-3"
+                placeholder="Format: 'Quantity,Unit,Description'"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s3">
+              <label>Ingredient 4</label>
+              <input
+                type="text"
+                name="ingredient-4"
+                placeholder="Format: 'Quantity,Unit,Description'"
+              />
+            </div>
+            <div class="input-field col s3">
+              <label>Ingredient 5</label>
+              <input
+                type="text"
+                name="ingredient-5"
+                placeholder="Format: 'Quantity,Unit,Description'"
+              />
+            </div>
+            <div class="input-field col s3">
+              <label>Ingredient 6</label>
+              <input
+                type="text"
+                name="ingredient-6"
+                placeholder="Format: 'Quantity,Unit,Description'"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="center-align">
+          <button
+            class="btn waves-effect waves-light btn-large"
+            type="submit"
+            name="action"
+          >
+            Publish Recipe!
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="shoppingListModal myModal hidden">
+      <div class="shopping-container">
+        <button class="btn--close-modal-shopping">&times;</button>
+        <div class="shoppingList" style="width: 60%">
+          <ul class="collection with-header">
+            <li class="collection-header"><h4>Shopping List</h4></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="favoritesModal myModal hidden">
+      <div class="favorites-container">
+        <button class="btn--close-modal-favorites">&times;</button>
+        <div class="favorites" style="width: 60%">
+          <ul class="collection with-header">
+            <li class="collection-header"><h4>Favourites</h4></li>
+            <p>No Items currently added</p>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="overlay hidden"></div>
+  </body>
+</html>
